@@ -19,4 +19,6 @@ const createFiltersComponent = () => {
             </form>`)
 };
 
-export {createFiltersComponent};
+export {
+  createFiltersComponent
+};

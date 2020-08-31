@@ -6,4 +6,6 @@ const createMenuComponent = () => {
   </nav>`)
 };
 
-export {createMenuComponent};
+export {
+  createMenuComponent
+};
