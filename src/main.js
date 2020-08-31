@@ -1,16 +1,24 @@
 //импорты из компонентов
-import {createEventEditComponent} from './components/editing.js';
-import {createEventComponent} from './components/event.js';
-import {createFiltersComponent} from './components/filters.js';
-import {createMenuComponent} from './components/menu.js';
-import {createSortingComponent} from './components/sorting.js';
-
+import {
+  createEventEditComponent
+} from './components/editing.js';
+import {
+  createEventComponent
+} from './components/event.js';
+import {
+  createFiltersComponent
+} from './components/filters.js';
+import {
+  createMenuComponent
+} from './components/menu.js';
+import {
+  createSortingComponent
+} from './components/sorting.js';
 
 // функция отрисовки компонентов
 const render = (path, markup, position = `beforeend`) => {
   path.insertAdjacentHTML(position, markup);
 };
-
 
 const NUMBER_OF_CARDS = 3;
 // объявление элементов страницы
@@ -27,6 +35,6 @@ render(tripEvents, createEventEditComponent());
 
 const eventsSorter = document.querySelector('.trip-events__trip-sort');
 
-for(let i = 0; i< NUMBER_OF_CARDS; i++){
+for (let i = 0; i < NUMBER_OF_CARDS; i++) {
   render(eventsSorter, createEventComponent());
 }
