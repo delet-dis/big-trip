@@ -4,6 +4,11 @@ node_js:
   - "10"
 
 notifications:
-  email: false
+  email: true
 
-script: npm run eslint; npm run build
+git:
+  depth: 1
+  quiet: true
+
+script: npm run build
+npm run eslint
