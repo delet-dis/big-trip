@@ -43,5 +43,6 @@
   "bugs": {
     "url": "https://github.com/delet-dis/big-trip/issues"
   },
-  "homepage": "https://github.com/delet-dis/big-trip#readme"
+  "homepage": "https://github.com/delet-dis/big-trip#readme",
+  "dependencies": {}
 }
