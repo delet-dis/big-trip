@@ -6,12 +6,11 @@ const OptimizeCSSAssetsPlugin = require(`optimize-css-assets-webpack-plugin`);
 const {
   CleanWebpackPlugin
 } = require(`clean-webpack-plugin`);
-const CopyWebpackPlugin = require(`copy-webpack-plugin`);
+const WebpackShellPlugin = require(`webpack-shell-plugin`);
 const RemovePlugin = require(`remove-files-webpack-plugin`);
 const {
   resolve
 } = require(`path`);
-const copyWebpackPlugin = require("copy-webpack-plugin");
 
 const SOURCE_DIRECTORY = resolve(__dirname, `./src`);
 const BUILD_DIRECTORY = resolve(__dirname, `./docs`);
@@ -81,13 +80,8 @@ module.exports = {
       template: `${SOURCE_DIRECTORY}/index.html`
     }),
     new MiniCssExtractPlugin(),
-    new copyWebpackPlugin({
-      patterns: [
-        {
-          from: `./docs/img/img`,
-          to: `./img`
-        }
-      ]
-    })
+    new WebpackShellPlugin({
+      onBuildEnd: 'node copy-to-images.js'
+    }),
   ],
 };
