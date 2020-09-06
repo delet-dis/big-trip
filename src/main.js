@@ -1,4 +1,5 @@
 //импорты из компонентов
+import './css/style.css';
 import {
   createEventEditComponent
 } from './components/editing.js';
