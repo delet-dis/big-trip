@@ -1,13 +1,20 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const {resolve} = require('path');
+const path = require(`path`);
+const HtmlWebpackPlugin = require(`html-webpack-plugin`);
+const MiniCssExtractPlugin = require(`mini-css-extract-plugin`);
+const TerserJSPlugin = require(`terser-webpack-plugin`);
+const OptimizeCSSAssetsPlugin = require(`optimize-css-assets-webpack-plugin`);
+const {
+  CleanWebpackPlugin
+} = require(`clean-webpack-plugin`);
+const CopyWebpackPlugin = require(`copy-webpack-plugin`);
+const RemovePlugin = require(`remove-files-webpack-plugin`);
+const {
+  resolve
+} = require(`path`);
+const copyWebpackPlugin = require("copy-webpack-plugin");
 
-const SOURCE_DIRECTORY = resolve(__dirname, './src');
-const BUILD_DIRECTORY = resolve(__dirname, './docs');
+const SOURCE_DIRECTORY = resolve(__dirname, `./src`);
+const BUILD_DIRECTORY = resolve(__dirname, `./docs`);
 
 module.exports = {
   optimization: {
@@ -30,37 +37,42 @@ module.exports = {
         test: /\.js$/,
         include: path.resolve(__dirname, `${SOURCE_DIRECTORY}/*.js`),
         use: {
-          loader: 'babel-loader',
+          loader: `babel-loader`,
           options: {
-            presets: 'env'
+            presets: `env`
           }
         }
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, `css-loader`],
       },
       {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'file-loader',
+          loader: `file-loader`,
           options: {
-            name: '[name].[ext]',
+            name: `[name].[ext]`,
             outputPath: `./fonts/`
           }
         }],
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline-loader'
+        loader: `svg-inline-loader`
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: 'file-loader',
-        options: {
-            name: `[path][name].[ext]`.replace(/.*src/, ''),
-        },
-    }
+        test: /\.(gif|png|jpe?g)$/,
+        use: [{
+          loader: `file-loader`,
+          options: {
+            name: `[folder]/[name].[ext]`,
+            outputPath: `img/`,
+            esModule: false,
+            useRelativePath: true
+          }
+        }]
+      },
     ],
   },
   plugins: [
@@ -69,5 +81,13 @@ module.exports = {
       template: `${SOURCE_DIRECTORY}/index.html`
     }),
     new MiniCssExtractPlugin(),
+    new copyWebpackPlugin({
+      patterns: [
+        {
+          from: `./docs/img/img`,
+          to: `./img`
+        }
+      ]
+    })
   ],
 };

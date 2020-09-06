@@ -15,7 +15,10 @@ import {
 import {
   createSortingComponent
 } from './components/sorting.js';
-
+import{
+  // eslint-disable-next-line no-unused-vars
+  img
+} from './img/logo.png';
 // функция отрисовки компонентов
 const render = (path, markup, position = `beforeend`) => {
   path.insertAdjacentHTML(position, markup);
