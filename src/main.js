@@ -16,13 +16,14 @@ import {
   createSortingComponent
 } from './components/sorting.js';
 import{
-  // eslint-disable-next-line no-unused-vars
-  img
-} from './img/logo.png';
+  loadLogo
+} from './components/logo.js';
 // функция отрисовки компонентов
 const render = (path, markup, position = `beforeend`) => {
   path.insertAdjacentHTML(position, markup);
 };
+
+loadLogo();
 
 const NUMBER_OF_CARDS = 3;
 // объявление элементов страницы
