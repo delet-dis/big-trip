@@ -1,7 +1,5 @@
-const loadLogo = () => {
-  const logo = document.querySelector(`.page-header__logo`);
-
-  logo.src = `/img/img/logo.png`;
+const createLogoComponent = () => {
+  return  `<img class="page-header__logo"  width="42" height="42" src="img/icons/icon.png" alt="Trip logo">`;
 };
 
-export {loadLogo};
+export {createLogoComponent};
